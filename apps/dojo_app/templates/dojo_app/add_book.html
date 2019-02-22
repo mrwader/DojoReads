@@ -1,0 +1,28 @@
+<h3>Add a Favorite Book</h3>
+<form action="/add_book" method="post">
+    {% csrf_token %}
+    <p>Title</p>
+    <input type="text" name="title">
+    <p>Author</p>
+    <select name="author_id">
+        {%for a in authors%}
+        <option value="{{a.id}}">{{a.name}}</option>
+        {%endfor%}
+    </select>
+
+    <p>Review</p>
+    <input type="text" name="review"><br>
+    <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <button>Add</button>
+</form>
+<form action="/add_author" method = "post">
+    {% csrf_token %}
+    <input type="text" name="author_name">
+    <button>Add author</button>
+</form>

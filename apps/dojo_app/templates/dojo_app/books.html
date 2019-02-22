@@ -1,0 +1,41 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dojo_app/css/books_style.css' %}">
+</head>
+
+    <div class="wrapper">
+        <div class="header">
+            <h1>Welcome, {{user.first_name}}</h1><br>
+            <div class="links">
+                <a href="/logout">Logout</a>
+                <a href="/add_book_page">Add book</a>
+            </div>
+        </div>
+        <div class="parent">
+            <div class="recent_books">
+                <h2>Recent Book Reviews:</h2>
+                {% for review in last %}
+                <h3><a href="/books/{{review.book.id}}">{{ review.book.title }}</a></h3>
+
+                {% for r in review.book.book_reviews.all %}
+                <p>Rating: {{r.rating}} / 5</p>
+                <p><i><a href="/users/{{r.user.id}}">{{r.user.first_name}}</a>: {{r.review}}</i></p>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+        <div class="other_books">
+            <h3>Other Books with Reviews:</h3>
+            <div style="    width: 410px;
+            height: 200px;
+            overflow: auto; margin-left: 25px;">
+
+                {% for b in books %}
+                <p><a href="/books/{{b.id}}">{{b.title}}</a></p>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    </div>

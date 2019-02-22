@@ -1,0 +1,28 @@
+<a href="/books">Home</a> <a href="/add_book_page">Add book</a> <a href="/logout">Logout</a>
+
+<h2>{{book.title}}</h2>
+<p>Author: {{book.author.name}}</p>
+<p>Reviews:</p>
+{% for r in book.book_reviews.all%}
+<p>Rating: {{r.rating}}</p>
+<p><a href="/users/{{r.user.id}}">{{r.user.first_name}}</a> said: {{r.review}}</p>
+{% if request.session.user == r.user.email %}
+<a href="/delete_review/{{r.id}}">Delete review</a>
+{%endif%}
+<p>{{r.created_at}}</p>
+{%endfor%}
+
+<form action = "/add_review" method="post">
+    {% csrf_token %}
+<p>Review</p>
+<input type="text" name="review"><br>
+<input type= "hidden" name="book_id" value="{{book.id}}">
+<select name="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
+<button>Add</button>
+</form>

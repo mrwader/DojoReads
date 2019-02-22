@@ -1,0 +1,9 @@
+<a href="/books">Home</a> <a href="/add_book_page">Add book</a> <a href="/logout">Logout</a>
+<p>Name {{user.first_name}} {{user.last_name}}</p> 
+<p>Email: {{user.email}}</p>
+<p>Total Reviews: {{user.reviews.all.count}}</p>
+
+<p>Posted Reviews on the following books:</p>
+{% for r in user.reviews.all %}
+<p>{{r.book.title}}</p>
+{%endfor%}
